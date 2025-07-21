@@ -22,7 +22,7 @@ export const viteConfigFilename = resolve(dir, '../../vite.config.ts');
 
 // Functions
 
-export function log(message, color) {
+export function log(message, color = 'blue') {
     const handle = chalk[color] ?? chalk.green;
 
     if (!handle) {
@@ -33,6 +33,10 @@ export function log(message, color) {
     }
 
     console.log(handle(message));
+}
+
+export function msg(message, color = 'green') {
+    log('(+) ' + message, color);
 }
 
 export function err(message, color = 'red') {
@@ -46,18 +50,29 @@ export function use() {
 
         const vite = spawn('vite', [ viteRoot, '--config', viteConfigFilename ]);
 
-        // vite.stdout.on('data', data => log(data));
 
-        vite.stderr.on('data', () => reject('Unknown Error'));
+        // Handling the data
+
+        vite.stdout.on('data', data => log(data));
+
+
+        // Handling the errors
+
+        vite.stderr.setEncoding('utf-8');
+        vite.stderr.on('data', message => reject(message));
+
+
+        // Handling the exit
 
         vite.on('close', code => resolve(code));
 
 
         // Logging the message
 
-        log('(+) Paris: Server started');
+        msg('Paris: Server started');
     })
 }
 
 
+console.log('import.meta.url', import.meta.url);
 use().catch(message => err('Paris: ' + message));
