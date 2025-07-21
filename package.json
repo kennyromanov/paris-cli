@@ -9,6 +9,7 @@
   },
   "scripts": {
     "lint": "eslint",
+    "build": "bin/build",
     "start": "bin/run"
   },
   "files": [
@@ -17,11 +18,18 @@
   "author": "Kenny Romanov",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-typescript": "^7.27.1",
     "@eslint/js": "^9.31.0",
     "@tailwindcss/cli": "^4.1.11",
+    "@types/chalk": "^2.2.4",
     "@types/node": "^24.0.15",
+    "esbuild": "^0.25.8",
     "eslint-plugin-vue": "^10.3.0",
     "globals": "^16.3.0",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.37.0",
     "vite-plugin-eslint": "^1.8.1",
     "vue-eslint-parser": "^10.2.0",
@@ -32,9 +40,9 @@
     "@originjs/vite-plugin-federation": "^1.4.1",
     "@tailwindcss/vite": "^4.1.11",
     "@vitejs/plugin-vue": "^6.0.0",
-    "exjsona": "link:exjsona",
+    "chalk": "^5.4.1",
+    "exjsona": "^1.0.9",
     "paris-vite-plugin": "^1.0.0",
-    "typescript": "^5.8.3",
     "vite": "^7.0.5",
     "vue": "^3.5.17"
   }

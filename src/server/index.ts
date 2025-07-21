@@ -1,7 +1,6 @@
 import { Obj } from './types';
 import { has } from './lib';
 import config from './config';
-console.log('config', config);
 
 
 // Constants
@@ -15,7 +14,7 @@ export const DEFAULT_REMOTES = {};
 
 // Variables
 
-export const port = config?.port ?? DEFAULT_SERVER_PORT;
+export const serverPort = config?.server?.port ?? DEFAULT_SERVER_PORT;
 
 export const hostUrl = config?.host?.url ?? DEFAULT_HOST_URL;
 

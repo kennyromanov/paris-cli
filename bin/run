@@ -1,25 +1,57 @@
-#!/bin/bash
+#!/usr/bin/env node
+
+import { resolve } from 'node:path';
+import { createServer } from 'vite';
+import { serverPort, remoteUrls } from '../dist/server/index.es.js';
+import chalk from 'chalk';
+import vue from '@vitejs/plugin-vue';
+import tailwindcss from '@tailwindcss/vite';
+// import eslint from 'vite-plugin-eslint';
+import paris from 'paris-vite-plugin';
 
 
-# If there is at least one argument and it does not start with "--"
+// Variables
 
-if [[ $# -gt 0 && "$1" != --* ]]; then
-    ENV="$1"
-    shift # Remove this argument so that it does not interfere
-fi
+export const DIR = process.cwd();
 
 
-# Parsing the named arguments
+// Functions
 
-while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        --env) ENV="$2"; shift ;;
-        *) echo "Unknown argument: '$1'" ;;
-    esac
-    shift
-done
+export function log(message, color) {
+    const handle = chalk[color] ?? chalk.green;
+
+    if (!handle) {
+        console.log(chalk.yellow(`(!) Paris Internal Error: Unknown color '${color}'`))
+        console.log(message);
+
+        return;
+    }
+
+    console.log(handle(message));
+}
+
+export async function use() {
+    const vite = await createServer({
+        root: resolve(DIR, './dist/shell'),
+        plugins: [
+            vue(),
+            tailwindcss(),
+            // eslint(),
+            paris({
+                remotes: remoteUrls,
+            }),
+        ],
+        resolve: {
+            alias: {
+                '@': resolve(DIR, './dist/shell'),
+            },
+        },
+    });
+
+    await vite.listen(serverPort);
+
+    log('(+) Paris: Server started and listening on port ' + serverPort);
+}
 
 
-# Launching the app
-
-bunx vite
+use().catch(console.error);

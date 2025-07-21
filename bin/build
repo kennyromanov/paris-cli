@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+import { cpSync } from 'node:fs';
+import esbuild from 'esbuild';
+import babelPlugin from '../babel-plugin.js';
+
+
+// Building the server
+
+esbuild.build({
+    entryPoints: [ 'src/server/index.ts' ],
+    external: [ 'node:fs', 'node:path', 'vite' ],
+    outfile: 'dist/server/index.cjs.js',
+    bundle: true,
+    platform: 'node',
+    format: 'cjs',
+    sourcemap: false,
+    minify: true,
+    plugins: [ babelPlugin() ],
+}).catch(() => process.exit(1));
+
+esbuild.build({
+    entryPoints: [ 'src/server/index.ts' ],
+    external: [ 'node:fs', 'node:path', 'vite' ],
+    outfile: 'dist/server/index.es.js',
+    bundle: true,
+    platform: 'node',
+    format: 'esm',
+    sourcemap: false,
+    minify: true,
+}).catch(() => process.exit(1));
+
+
+// Copying the static files
+
+cpSync('./src/shell', './dist/shell', { recursive: true });
