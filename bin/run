@@ -42,7 +42,7 @@ export function use() {
 
         const vite = spawn('vite', [ viteRoot, '--config', viteConfigFilename ]);
 
-        // vite.stdout.on('data', data => log(data));
+        vite.stdout.on('data', data => log(data));
 
         vite.stderr.on('data', data => reject(data));
 
