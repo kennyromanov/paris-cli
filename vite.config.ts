@@ -6,10 +6,6 @@ import tailwindcss from '@tailwindcss/vite';
 // import eslint from 'vite-plugin-eslint';
 import paris from 'paris-vite-plugin';
 
-console.log('import.meta.url', import.meta.url);
-
-import('./src/server').then(console.log);
-
 export default defineConfig({
     plugins: [
         vue(),

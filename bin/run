@@ -35,6 +35,10 @@ export function log(message, color) {
     console.log(handle(message));
 }
 
+export function err(message, color = 'red') {
+    log('(!) ' + message, color);
+}
+
 export function use() {
     return new Promise((resolve, reject) => {
 
@@ -42,9 +46,9 @@ export function use() {
 
         const vite = spawn('vite', [ viteRoot, '--config', viteConfigFilename ]);
 
-        vite.stdout.on('data', data => log(data));
+        // vite.stdout.on('data', data => log(data));
 
-        vite.stderr.on('data', data => reject(data));
+        vite.stderr.on('data', () => reject('Unknown Error'));
 
         vite.on('close', code => resolve(code));
 
@@ -56,4 +60,4 @@ export function use() {
 }
 
 
-use().catch(console.error);
+use().catch(message => err('Paris: ' + message));
