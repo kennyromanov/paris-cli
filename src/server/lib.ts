@@ -1,5 +1,6 @@
 import { constants, existsSync, readFileSync } from 'node:fs';
 import { access } from 'node:fs/promises';
+import { Obj } from './types';
 
 
 // Constants
@@ -27,7 +28,7 @@ export function isset<T>(val: T): val is NonNullable<T> {
     return val !== null && val !== undefined;
 }
 
-export function has(obj: types.Obj, key: string): boolean {
+export function has(obj: Obj, key: string): boolean {
     return obj.hasOwnProperty(key);
 }
 
@@ -36,7 +37,7 @@ export function inarr(val: any, ...arr: any): boolean {
 }
 
 export async function isExists(filename: string): Promise<boolean> {
-    try { return !!await access(filename, constants.F_OK); }
+    try { await access(filename, constants.F_OK); return true; }
     catch { return false; }
 }
 

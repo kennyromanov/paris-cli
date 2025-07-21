@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { Obj } from './types';
 import { getFileSync, DIR } from './lib';
 import exjsona from 'exjsona';
-import parisConfig from '@config';
+import parisConfig from '../../.parisrc.json';
 
 
 // Constants

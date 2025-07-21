@@ -4,12 +4,12 @@
   "description": "A Module Federating Tool (Alpha)",
   "keywords": ["microfrontends", "module federation", "module federation on vue", "alpha version"],
   "type": "module",
+  "bin": {
+    "paris": "./bin/run"
+  },
   "scripts": {
     "lint": "eslint",
-    "start": "vite",
-    "build:types": "vue-tsc --noEmit false",
-    "build:css": "tailwindcss -i ./src/app.tail.css -o ./dist/app.css --minify",
-    "build": "vite build && npm run build:types && npm run build:css"
+    "start": "bin/run"
   },
   "files": [
     "dist/"
@@ -22,23 +22,20 @@
     "@types/node": "^24.0.15",
     "eslint-plugin-vue": "^10.3.0",
     "globals": "^16.3.0",
-    "sass-embedded": "^1.89.2",
     "typescript-eslint": "^8.37.0",
     "vite-plugin-eslint": "^1.8.1",
-    "vue-eslint-parser": "^10.2.0"
+    "vue-eslint-parser": "^10.2.0",
+    "vue-tsc": "^3.0.3"
   },
   "dependencies": {
     "@kennyromanov/paris": "^1.0.0",
+    "@originjs/vite-plugin-federation": "^1.4.1",
     "@tailwindcss/vite": "^4.1.11",
     "@vitejs/plugin-vue": "^6.0.0",
-    "exjsona": "^1.0.8",
+    "exjsona": "link:exjsona",
     "paris-vite-plugin": "^1.0.0",
     "typescript": "^5.8.3",
     "vite": "^7.0.5",
-    "vue": "^3.5.17",
-    "vue-tsc": "^3.0.3"
-  },
-  "peerDependencies": {
-    "@originjs/vite-plugin-federation": "^1.4.1"
+    "vue": "^3.5.17"
   }
 }

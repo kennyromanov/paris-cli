@@ -1,6 +1,7 @@
 import { Obj } from './types';
 import { has } from './lib';
 import config from './config';
+console.log('config', config);
 
 
 // Constants

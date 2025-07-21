@@ -18,7 +18,7 @@ onMounted(async () => {
   <div class="paris_app" ref="el" />
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 
 .paris_app {
   width: 100%;

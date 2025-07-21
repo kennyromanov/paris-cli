@@ -1,6 +1,7 @@
 {
   "host": {
-    "url": "http://localhost"
+    "domain": "localhost",
+    "url": "http://{host.domain}"
   },
   "server": {
     "port": 5173

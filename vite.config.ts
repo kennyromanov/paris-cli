@@ -21,13 +21,6 @@ export default defineConfig({
       '@config': resolve(__dirname, './.parisrc.json'),
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-      },
-    },
-  },
   build: {
     rollupOptions: {
       external: [ 'vue' ],
