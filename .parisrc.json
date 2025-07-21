@@ -1,0 +1,16 @@
+{
+  "host": {
+    "url": "http://localhost"
+  },
+  "server": {
+    "port": 5173
+  },
+  "remotes": {
+    "dev": {
+      "port": 9001,
+      "entry": "paris.js",
+      "component": "app",
+      "url": "{host.url}:{remotes.dev.port}/{remotes.dev.entry}"
+    }
+  }
+}
