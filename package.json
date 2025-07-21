@@ -1,6 +1,6 @@
 {
   "name": "paris-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Module Federating Tool (Alpha)",
   "keywords": ["microfrontends", "module federation", "module federation on vue", "alpha version"],
   "type": "module",
@@ -9,12 +9,11 @@
   },
   "scripts": {
     "lint": "eslint",
-    "build": "bin/build",
-    "start": "bin/run",
-    "prepare": "npm run build"
+    "start": "bin/run"
   },
   "files": [
     "dist/",
+    "src/server/",
     "src/shell/",
     "index.html",
     "vite.config.ts"
