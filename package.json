@@ -1,6 +1,6 @@
 {
   "name": "paris-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Module Federating Tool (Alpha)",
   "keywords": ["microfrontends", "module federation", "module federation on vue", "alpha version"],
   "type": "module",
@@ -14,7 +14,10 @@
     "prepare": "npm run build"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "src/shell/",
+    "index.html",
+    "vite.config.ts"
   ],
   "author": "Kenny Romanov",
   "license": "MIT",

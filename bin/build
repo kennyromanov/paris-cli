@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { cpSync } from 'node:fs';
 import esbuild from 'esbuild';
 import babelPlugin from '../babel-plugin.js';
 
@@ -29,8 +28,3 @@ esbuild.build({
     sourcemap: false,
     minify: true,
 }).catch(() => process.exit(1));
-
-
-// Copying the static files
-
-cpSync('./src/shell', './dist/shell', { recursive: true });

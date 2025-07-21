@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { loadEnv, defineConfig, resolveConfig, createServer } from 'vite';
+import { serverPort, remoteUrls } from '../dist/server/index.es.js';
+import chalk from 'chalk';
+import vue from '@vitejs/plugin-vue';
+import tailwindcss from '@tailwindcss/vite';
+// import eslint from 'vite-plugin-eslint';
+import paris from 'paris-vite-plugin';
+
+
+// Third-parties
+
+export const VITE_FILE_URL = import.meta.url;
+export const viteDir = fileURLToPath(VITE_FILE_URL);
+export const viteRoot = resolve(viteDir, '../..');
+export const viteMode = 'development';
+export const viteCommand = 'serve';
+
+Object.assign(process.env, loadEnv(viteMode, viteRoot));
+
+
+// Functions
+
+export function log(message, color) {
+    const handle = chalk[color] ?? chalk.green;
+
+    if (!handle) {
+        console.log(chalk.yellow(`(!) Paris Internal Error: Unknown color '${color}'`))
+        console.log(message);
+
+        return;
+    }
+
+    console.log(handle(message));
+}
+
+export async function use() {
+
+    // Getting the server
+
+    const config = defineConfig({
+        configFile: false,
+        root: viteRoot,
+        plugins: [
+            vue(),
+            tailwindcss(),
+            // eslint(),
+            paris({
+                remotes: remoteUrls,
+            }),
+        ],
+        resolve: {
+            alias: {
+                '@': resolve(viteDir, '../..'),
+            },
+        },
+    });
+
+    const newConfig = await resolveConfig(config, viteCommand, viteMode);
+
+    const vite = await createServer(newConfig);
+
+
+    // Starting the server
+
+    await vite.listen(serverPort);
+
+    log('(+) Paris: Server started and listening on port ' + serverPort);
+}
+
+
+use().catch(console.error);

@@ -36,7 +36,7 @@ export function getConfig(filename: string = defaultConfigFilename, variables: O
     if (configObj)
         return exjsona(configObj, { ...parisConfig, ...variables }, objDepth);
     else
-        return null;
+        return exjsona(parisConfig, variables, objDepth);
 }
 
 

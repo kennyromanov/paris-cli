@@ -9,6 +9,10 @@ export const DEFAULT_SERVER_PORT = 5173;
 
 export const DEFAULT_HOST_URL = 'http://localhost';
 
+export const DEFAULT_REMOTE_ENTRY = 'paris.js';
+
+export const DEFAULT_REMOTE_URL = 'http://localhost:9001/assets';
+
 export const DEFAULT_REMOTES = {};
 
 
@@ -35,8 +39,10 @@ export function getRemotesUrls(remotes: Obj): Obj<string> {
         if (!has(remotes, remoteName)) continue;
 
         const remote = remotes[remoteName];
+        const remoteEntry = remote?.entry ?? DEFAULT_REMOTE_ENTRY;
+        const remoteUrl = remote?.url ?? DEFAULT_REMOTE_URL;
 
-        result[remoteName] = remote?.url ?? null;
+        result[remoteName] = remoteUrl + '/' + remoteEntry;
     }
 
 
