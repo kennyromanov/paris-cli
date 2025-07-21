@@ -1,7 +1,3 @@
-console.log('import.meta.url', import.meta.url);
-
-import('./src/server').then(console.log);
-
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { serverPort, remoteUrls } from './src/server';

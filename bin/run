@@ -74,5 +74,4 @@ export function use() {
 }
 
 
-console.log('import.meta.url', import.meta.url);
 use().catch(message => err('Paris: ' + message));
