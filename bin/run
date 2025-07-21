@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
 import { serverPort, remoteUrls } from '../dist/server/index.es.js';
 import chalk from 'chalk';
@@ -10,9 +11,14 @@ import tailwindcss from '@tailwindcss/vite';
 import paris from 'paris-vite-plugin';
 
 
+// Constants
+
+export const FILE_URL = import.meta.url;
+
+
 // Variables
 
-export const DIR = process.cwd();
+export const dir = fileURLToPath(FILE_URL);
 
 
 // Functions
@@ -32,7 +38,7 @@ export function log(message, color) {
 
 export async function use() {
     const vite = await createServer({
-        root: resolve(DIR, './dist/shell'),
+        root: resolve(dir, '../../dist/shell'),
         plugins: [
             vue(),
             tailwindcss(),
@@ -43,8 +49,12 @@ export async function use() {
         ],
         resolve: {
             alias: {
-                '@': resolve(DIR, './dist/shell'),
+                '@': resolve(dir, '../../dist/shell'),
             },
+        },
+        optimizeDeps: {
+            noDiscovery: true,
+            include: undefined,
         },
     });
 
