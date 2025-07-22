@@ -48,7 +48,14 @@ export function use() {
 
         // Getting the vite server
 
-        const vite = spawn('vite', [ viteRoot, '--config', viteConfigFilename ]);
+        const args = process.argv.slice(2);
+
+        const vite = spawn('vite', [
+            viteRoot,
+            '--config', viteConfigFilename,
+
+            ...args,
+        ]);
 
 
         // Handling the data

@@ -1,6 +1,14 @@
 import { Obj } from './types';
 import { has } from './lib';
 import config from './config';
+import minimist from 'minimist';
+
+
+// Third-parties
+
+const processArgs = process.argv?.slice(2) ?? [];
+
+const args = minimist(processArgs);
 
 
 // Constants
@@ -18,16 +26,25 @@ export const DEFAULT_REMOTES = {};
 
 // Variables
 
-export const serverPort = config?.server?.port ?? DEFAULT_SERVER_PORT;
+export const serverPort = args?.port ?? config?.server?.port ?? DEFAULT_SERVER_PORT;
 
-export const hostUrl = config?.host?.url ?? DEFAULT_HOST_URL;
+export const hostUrl = args?.host ?? config?.host?.url ?? DEFAULT_HOST_URL;
 
-export const remotes = config?.remotes ?? DEFAULT_REMOTES;
+export const remotes = getRemotesArg() ?? config?.remotes ?? DEFAULT_REMOTES;
 
 export const remoteUrls = getRemotesUrls(remotes);
 
 
 // Functions
+
+export function getRemotesArg(): Obj | null {
+    const remotesArg = args[0] ?? args?.remotes ?? null;
+
+    if (remotesArg)
+        return JSON.parse(remotesArg);
+    else
+        return null;
+}
 
 export function getRemotesUrls(remotes: Obj): Obj<string> {
     const result: Obj<string> = {};
