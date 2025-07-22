@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { Obj } from './types';
 import { getFileSync, DIR } from './lib';
 import exjsona from 'exjsona';
-import parisConfig from '../../.parisrc.json';
+import parisConfigObj from '../../.parisrc.json';
 
 
 // Constants
@@ -15,6 +15,8 @@ export const DEFAULT_CONFIG_OBJ_DEPTH = 5;
 // Variables
 
 export const defaultConfigFilename = join(DIR, DEFAULT_CONFIG_NAME);
+
+export const parisConfig = exjsona(parisConfigObj, {}, DEFAULT_CONFIG_OBJ_DEPTH);
 
 export const defaultConfig = getConfig();
 

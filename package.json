@@ -1,6 +1,6 @@
 {
   "name": "paris-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Module Federating Tool (Alpha)",
   "keywords": ["microfrontends", "module federation", "module federation on vue", "alpha version"],
   "type": "module",
