@@ -1,17 +1,19 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { serverPort, remoteUrls } from './src/server';
+import { serverPort, serverOrigin, remoteUrls } from './src/server';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from '@tailwindcss/vite';
 // import eslint from 'vite-plugin-eslint';
 import paris from 'paris-vite-plugin';
 
 export default defineConfig({
+    base: '/',
     plugins: [
         vue(),
         tailwindcss(),
         // eslint(),
         paris({
+            name: 'paris',
             remotes: remoteUrls,
         }),
     ],
@@ -32,6 +34,7 @@ export default defineConfig({
     },
     server: {
         port: serverPort,
+        origin: serverOrigin,
     },
     preview: {
         port: serverPort,

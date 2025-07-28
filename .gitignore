@@ -32,6 +32,7 @@ yarn-error.log*
 # Custom
 /node_modules
 /.vscode
+/.__mf__temp
 /.thumbs.db
 /.prettierignore
 /.prettierrc.json

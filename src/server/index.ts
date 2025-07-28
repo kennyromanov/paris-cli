@@ -26,9 +26,11 @@ export const DEFAULT_REMOTES = {};
 
 // Variables
 
+export const hostUrl = args?.host ?? config?.host?.url ?? DEFAULT_HOST_URL;
+
 export const serverPort = args?.port ?? config?.server?.port ?? DEFAULT_SERVER_PORT;
 
-export const hostUrl = args?.host ?? config?.host?.url ?? DEFAULT_HOST_URL;
+export const serverOrigin = hostUrl + ':' + serverPort;
 
 export const remotes = getRemotesArg() ?? config?.remotes ?? DEFAULT_REMOTES;
 
@@ -46,8 +48,8 @@ export function getRemotesArg(): Obj | null {
         return null;
 }
 
-export function getRemotesUrls(remotes: Obj): Obj<string> {
-    const result: Obj<string> = {};
+export function getRemotesUrls(remotes: Obj): Obj {
+    const result: Obj = {};
 
 
     // Iterating for each remote
@@ -59,7 +61,10 @@ export function getRemotesUrls(remotes: Obj): Obj<string> {
         const remoteEntry = remote?.entry ?? DEFAULT_REMOTE_ENTRY;
         const remoteUrl = remote?.url ?? DEFAULT_REMOTE_URL;
 
-        result[remoteName] = remoteUrl + '/' + remoteEntry;
+        result[remoteName] = {
+            entry: remoteUrl + '/' + remoteEntry,
+            type: 'esm',
+        };
     }
 
 
