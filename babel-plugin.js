@@ -14,7 +14,7 @@ export function plugin() {
                 return { contents: code, loader: 'js' };
             });
         },
-    }
+    };
 }
 
 export default plugin;
