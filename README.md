@@ -1,6 +1,6 @@
 # Paris CLI
 
-A tiny command-line utility for serving remote components powered by [Paris](https://www.npmjs.com/package/@kennyromanov/paris). It ships with a Vite setup and sensible defaults so you can federate and preview components locally in seconds.
+A tiny command-line utility for previewing your remote components powered by [Paris](https://www.npmjs.com/package/@kennyromanov/paris). It ships with a Vite setup and sensible defaults so you can federate and preview components locally in seconds.
 
 ### Here's a simple example:
 
@@ -72,7 +72,7 @@ paris
     "dev": {
       "port": 9001,
       "entry": "paris.js",
-      "component": "app",
+      "component": "entry",
       "url": "{host.url}:{remotes.dev.port}/templates"
     }
   }
@@ -86,14 +86,6 @@ paris --port 3000
 paris --host http://localhost
 paris --remotes '{"dev":{"url":"http://localhost:9001/assets","entry":"paris.js"}}'
 ```
-
----
-
-## Tips & Tricks
-
-1. Use `onInject` in your remote component to consume values provided by the built‑in shell.
-2. `.parisrc.json` uses [ExJSONa](https://www.npmjs.com/package/exjsona) so you can reference variables like `{host.url}` throughout the file.
-3. CLI flags override the config file and any unknown options are passed straight to Vite (e.g. `paris --open`).
 
 ---
 
